@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Notes</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script>
+  	$(document).ready(function(){
+  	
+  	$("#linkCrt").click(function(){
+  	  	$("#fmUserAcc").attr("th:action","@{/NoteApp/userAccount}");
+  		$("#fmUserAcc").submit();
+  	});
+
+  	});
+  	
+  	</script>
+</head>
+
+<body>
+	
+	<div class="container">
+		<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+		<form th:action="@{/NoteApp/login}" method="post" class="form-signin" th:object="${user}">
+			<h3 align="center" class="form-signin-heading" th:text="Welcome"></h3>
+			<br/>
+			 
+			<input type="text" th:field="*{name}" placeholder="UserId"
+				class="form-control" /> <br/> 
+			<input type="password"  placeholder="Password"
+				id="password" th:field="*{password}" class="form-control" /> <br/> 
+				
+			<div align="center" th:if="${msg}">
+				<p style="font-size: 20; color: #FF1C19;" th:utext="${msg}">${msg}</p>				
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+		</form>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+	
+	<div class="col-md-6 col-md-offset-3" align="center">
+	<form th:action="@{/NoteApp/userAccount}" method="get" id="fmUserAcc">
+		<a href="#" id="linkCrt">Create account</a>
+	</form>	
+	</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<form th:action="@{/NoteApp/}" method="get">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+	</form>	
+	<div class="container">
+	
+		<div th:switch="${notes}">
+   		<h2 th:case="null">No Notes created yet!</h2>	
+        <div th:case="*">
+            <h2>Notes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="note : ${notes}">
+                    <td th:text="${note.name}"></td>
+                    <td th:text="${note.description}"></td>
+                    <td><a th:href="@{/NoteApp/edit/{id}(id=${note.id})}">Edit</a></td>
+                    <td><a th:href="@{/NoteApp/delete/{id}(id=${note.id})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+</div>
+ <form th:action="@{/NoteApp/createNote/{name}(name=${username})}" method="post">  
+    <button type="submit">Add a new note</button>
+    </form>
+	</div>
+
+</body>
